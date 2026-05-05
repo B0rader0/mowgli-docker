@@ -44,22 +44,22 @@ export OM_USE_RELATIVE_POSITION=False
 
 # If needed, uncomment and set to coordinates near you (these default coordinates are somewhere in Germany).
 # This will be your map origin!
-export OM_DATUM_LAT=48.8831951
-export OM_DATUM_LONG=2.1661984
+export OM_DATUM_LAT=48.05955269904
+export OM_DATUM_LONG=11.66314128680
 # export OM_DATUM_LAT=48.13724720055111
 # export OM_DATUM_LONG=11.575605219552623
 
 # GPS protocol. Use UBX for u-blox chipsets and NMEA for everything else
-export OM_GPS_PROTOCOL=UBX
+export OM_GPS_PROTOCOL=NMEA
 
 # NTRIP Settings
 # Set to False if using external radio plugged into the Ardusimple board.
 export OM_USE_NTRIP=True
-export OM_NTRIP_HOSTNAME=caster.centipede.fr
+export OM_NTRIP_HOSTNAME=192.168.178.132
 export OM_NTRIP_PORT=2101
-export OM_NTRIP_USER=centipede
-export OM_NTRIP_PASSWORD=centipede
-export OM_NTRIP_ENDPOINT=OUIL
+export OM_NTRIP_USER=rover
+export OM_NTRIP_PASSWORD=none
+export OM_NTRIP_ENDPOINT=ob-one
 
 # If you want to use F9R's sensor fusion, set this to true (you will also need to set DATUM_LAT and DATUM_LONG.
 # Consider this option unstable, since I don't have the F9R anymore, so I'm not able to test this.
