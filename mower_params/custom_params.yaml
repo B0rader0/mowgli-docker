@@ -1,8 +1,6 @@
-# Custom-robot params. In CUSTOM mode, open_mower's _params.launch loads ONLY this
-# file (PARAMS_PATH/custom_params.yaml), and it loads it last. So the keys below
-# override the image defaults on a key-by-key basis.
+# Migrated from the currently effective Rexy2 configuration.
+# This file is loaded last in CUSTOM mode.
 
-# Yardforce500 + Mowlgi specific tuning of the PIDs
 move_base_flex:
   FTCPlanner:
     kd_ang: 0.5
@@ -47,82 +45,94 @@ move_base_flex:
 
 ll:
   services:
+    sound:
+      language: "en"
+      volume: 0
+      background_sounds: false
+      dfp_is_5v: false
+
     gps:
-      baudrate: 921600
+      baudrate: 115200
       serial_port: /dev/gps
       device_type: serial
       mode: absolute
-      protocol: UBX
-      datum_lat: 0 # PUT YOUR BASE STATION COORDINATES HERE
-      datum_long: 0
+      protocol: NMEA
+      datum_lat: 48.05955269904
+      datum_long: 11.66314128680
       datum_height: 0
-    # Yardforce500 defaults
+
     imu:
       axis_config: "+X-Y-Z"
-    # Yardforce500 defaults
+
     diff_drive:
-      ticks_per_m: 300
+      ticks_per_m: 300.0
       wheel_distance_m: 0.325
-    # Yardforce500 defaults
+
     power:
-      battery_full_voltage: 28.5
-      battery_empty_voltage: 24.0
-      battery_critical_voltage: 23.0
-      battery_critical_high_voltage: 29.0
-      charge_critical_high_voltage: 30.0
-      charge_critical_high_current: 1.5
+      battery_full_voltage: 27.9
+      battery_empty_voltage: 23.0
+      battery_critical_voltage: 22.0
+      battery_critical_high_voltage: 28.4
+      charge_critical_high_voltage: 29.0
+      charge_critical_high_current: 1.0
 
-# Yardforce500 defaults
 xbot_positioning:
-  antenna_offset_x: 0.3
+  antenna_offset_x: -0.075
   antenna_offset_y: 0.0
+  max_gps_accuracy: 0.2
+  debug: false
 
-# This is for Pete_MI632's speed limiter, which is not yet part of upstream, but is in jeremysalwen's image
-# 3000 RPM is the minimal RPM we want for a Yardforce 500.  For other mowers you might want to change this value.
 mower_speed_limiter:
   mow_erpm_limit: 3000
 
-# This is for Pete_MI632's map persistence feature, which is not yet part of upstream, but is in jeremysalwen's image
 map_service:
-  persist_mode: 3 # 0: Off 1: Special "persist" areas 2: Nav areas 3: Nav + Mow areas 4: Mow areas
+  persist_mode: 3
   persist_num_paths: 10
 
 ntrip_client:
-  host: # PUT YOUR NTRIP CLIENT SETTINGS HERE
-  port:
-  username:
-  password:
-  mountpoint:
-  reconnect_attempt_max: 5
-  reconnect_attempt_wait_seconds: 99999
+  host: 192.168.178.132
+  port: 2101
+  username: Rexy2
+  password: none
+  mountpoint: ob-one
+  reconnect_attempt_max: 99999
+  reconnect_attempt_wait_seconds: 5
 
 mower_logic:
-  automatic_mode: 0
-  docking_approach_distance: 1.5
-  docking_extra_time: 0
+  automatic_mode: 1
+  docking_approach_distance: 2.0
+  docking_distance: 1.0
+  docking_extra_time: 0.0
   docking_retry_count: 4
-  docking_min_voltage: 5.0
-  docking_redock: false
-  outline_overlap_count: 2
-  outline_count: 0
+  docking_redock: true
+  docking_waiting_time: 0.0
+  outline_overlap_count: 0
+  outline_count: 4
   outline_offset: 0.05
-  mow_angle_offset: 0
+  mow_angle_offset: 0.0
   mow_angle_offset_is_absolute: false
-  mow_angle_increment: 0
-  gps_wait_time: 10.0
-  gps_timeout: 10.0
-  rain_mode: 0
+  mow_angle_increment: 48.0
+  gps_wait_time: 20.0
+  gps_timeout: 5.0
+  rain_mode: 2
   rain_delay_minutes: 30
   rain_check_seconds: 20
   cu_rain_threshold: -1
   undock_angled_distance: 0.0
   undock_angle: 0.0
-  undock_fixed_angle: true
-  undock_use_curve: true
+  undock_distance: 2.0
+  undock_fixed_angle: false
+  undock_use_curve: false
   emergency_lift_period: -1
   emergency_tilt_period: -1
   ignore_charging_current: false
-
+  perimeter_signal: 0
+  tool_width: 0.13
+  motor_cold_temperature: 40.0
+  motor_hot_temperature: 80.0
+  shutdown_esc_max_pitch: 0
+  enable_mower: true
+  emergency_input_config: ""
 
 xbot_monitoring:
   external_mqtt_enable: false
